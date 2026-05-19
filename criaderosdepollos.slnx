@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="CriaderoDePollos.DataAccess/CriaderosDePollos.DataAccess.csproj" />
+  <Project Path="CriaderoDePollos.Entities/CriaderosDePollos.Entities.csproj" />
+  <Project Path="CriaderoDePollos.Enums/CriaderosDePollos.Enums.csproj" />
+  <Project Path="CriaderoDePollos.Repository/CriaderosDePollos.Repository.csproj" />
+  <Project Path="CriaderosDePollos.Abstactions/CriaderosDePollos.Abstactions.csproj" />
+  <Project Path="CriaderosDePollos.Application/CriaderosDePollos.Application.csproj" />
+  <Project Path="CriaderosDePollos.Services/CriaderosDePollos.Services.csproj" />
+  <Project Path="CriaderosDePollos.WebApi/CriaderosDePollos.WebApi.csproj" />
+</Solution>

@@ -1,0 +1,6 @@
+@CriaderosDePollos.WebApi_HostAddress = http://localhost:5038
+
+GET {{CriaderosDePollos.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
