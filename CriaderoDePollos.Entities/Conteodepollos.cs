@@ -1,4 +1,5 @@
 ﻿using CriaderosDePollos.Abstactions;
+using CriaderosDePollos.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CriaderoDePollos.Entities

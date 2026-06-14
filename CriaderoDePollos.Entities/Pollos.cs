@@ -1,5 +1,7 @@
 ﻿using CriaderoDePollos.Entities;
+using CriaderoDePollos.Enums;
 using CriaderosDePollos.Abstactions;
+using CriaderosDePollos.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
