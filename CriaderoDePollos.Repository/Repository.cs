@@ -5,7 +5,7 @@ namespace CriaderoDePollos.Repository
     public interface IRepository<T> : IDbOperation<T>
     {
     }
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : class , IEntidad
     {
         IDbContext<T> _db;
         public Repository(IDbContext<T> db)

@@ -33,11 +33,14 @@ builder.Services.AddScoped(typeof(IDbContext<>), typeof(DbContext<>));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+
+app.UseSwaggerUI(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Criaderos De Pollos API v1");
+
+    options.RoutePrefix = string.Empty;
+});
 
 app.UseHttpsRedirection();
 
