@@ -1,7 +1,11 @@
-﻿using CriaderosDePollos.Abstactions;
+﻿using CriaderoDePollos.Repository;
+using CriaderosDePollos.Abstactions;
 
 namespace CriaderosDePollos.Application
 {
+    public interface IApplication<T> : IDbOperation<T>
+    {
+    }
     public class Application<T> : IApplication<T>
     {
         private IRepository<T> _repositorio;
@@ -30,7 +34,5 @@ namespace CriaderosDePollos.Application
         }
     }
 
-    public interface IApplication<T> : IDbOperation<T>
-    {
-    }
+   
 }

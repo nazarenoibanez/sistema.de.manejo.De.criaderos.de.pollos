@@ -12,9 +12,10 @@ namespace CriaderosDePollos.WebApi.Controllers
     public class GalponesController : ControllerBase
     {
         private readonly ILogger<GalponesController> _logger;
+        private readonly IStringService _service;
         private readonly IApplication<Galpones> _Galpones;
         private readonly IMapper _mapper;
-        private readonly IStringService _service;
+       
 
         public GalponesController(ILogger<GalponesController> logger, IApplication<Galpones> application, IMapper mapper, IStringService service)
         {
@@ -25,14 +26,14 @@ namespace CriaderosDePollos.WebApi.Controllers
         }
         [HttpGet]
         [Route("GetAll")]
-        public async Task<IActionResult> All()
+        public IActionResult All()
         {
             return Ok(_mapper.Map<IList<GalponesResponseDto>>(_Galpones.GetAll()));
 
         }
         [HttpGet]
         [Route("ById")]
-        public async Task<IActionResult> ById(int? id)
+        public IActionResult ById(int? id)
         {
             if (!id.HasValue)
             {
@@ -47,7 +48,7 @@ namespace CriaderosDePollos.WebApi.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> crear(GalponesRequestDto request)
+        public IActionResult crear(GalponesRequestDto request)
         {
             if (!ModelState.IsValid)
             {
@@ -58,7 +59,7 @@ namespace CriaderosDePollos.WebApi.Controllers
             return Ok(galpon.Id);
         }
         [HttpPut]
-        public async Task<IActionResult> editar(int? id, GalponesRequestDto galponesRequest)
+        public IActionResult editar(int? id, GalponesRequestDto galponesRequest)
         {
             if (!id.HasValue)
             { return BadRequest(); }
@@ -76,7 +77,7 @@ namespace CriaderosDePollos.WebApi.Controllers
             return Ok();
         }
         [HttpDelete]
-        public async Task<IActionResult> eliminar(int? id)
+        public IActionResult eliminar(int? id)
         {
             if (!id.HasValue)
             {

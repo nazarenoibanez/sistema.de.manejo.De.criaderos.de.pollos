@@ -1,4 +1,5 @@
 ﻿using CriaderosDePollos.Abstactions;
+using CriaderosDePollos.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 namespace CriaderoDePollos.DataAccess
