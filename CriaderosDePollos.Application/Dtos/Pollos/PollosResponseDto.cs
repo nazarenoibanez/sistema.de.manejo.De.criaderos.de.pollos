@@ -8,7 +8,7 @@ namespace CriaderosDePollos.Application.Dtos.Pollos
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public string tipoPollo { get; set; }
-        public string tipoAlimento { get; set; }
+        public string TipoPollo { get; set; } 
+        public string TipoAlimento { get; set; }
     }
 }

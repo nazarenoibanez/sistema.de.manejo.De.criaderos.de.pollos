@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CriaderosDePollos.Application;
 using CriaderosDePollos.Application.Dtos.Galpones;
+using CriaderosDePollos.Application.Dtos.Pollos;
 using CriaderosDePollos.Entities;
 using CriaderosDePollos.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -9,27 +10,26 @@ namespace CriaderosDePollos.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GalponesController : ControllerBase
+    public class PollosControlle : ControllerBase
     {
-
-        private readonly ILogger<GalponesController> _logger;
+        private readonly ILogger<PollosControlle> _logger;
         private readonly IStringService _service;
-        private readonly IApplication<Galpones> _Galpones;
+        private readonly IApplication<Pollos> _Pollos;
         private readonly IMapper _mapper;
-       
 
-        public GalponesController(ILogger<GalponesController> logger, IApplication<Galpones> application, IMapper mapper, IStringService service)
+        public PollosControlle(ILogger<PollosControlle> logger, IStringService service,
+            IApplication<Pollos> pollos, IMapper mapper)
         {
             _logger = logger;
-            _Galpones = application;
-            _mapper = mapper;
             _service = service;
+            _Pollos = pollos;
+            _mapper = mapper;
         }
         [HttpGet]
-        [Route("GetAll")]
+        [Route("All")]
         public IActionResult All()
         {
-            return Ok(_mapper.Map<IList<GalponesResponseDto>>(_Galpones.GetAll()));
+            return Ok(_mapper.Map<IList<PollosResponseDto>>(_Pollos.GetAll()));
 
         }
         [HttpGet]
@@ -40,29 +40,29 @@ namespace CriaderosDePollos.WebApi.Controllers
             {
                 return BadRequest();
             }
-            Galpones galpon = _Galpones.GetById(id.Value);
+            Pollos galpon = _Pollos.GetById(id.Value);
             if (galpon is null)
             {
                 return NotFound();
             }
-            return Ok(_mapper.Map<GalponesResponseDto>(galpon));
+            return Ok(_mapper.Map<PollosRequestDto>(galpon));
 
         }
         [HttpPost]
         [Route("Crear")]
-        public IActionResult crear(GalponesRequestDto request)
+        public IActionResult crear(PollosRequestDto request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var galpon = _mapper.Map<Galpones>(request);
-            _Galpones.Save(galpon);
-            return Ok(galpon.Id);
+            var pollos = _mapper.Map<Pollos>(request);
+            _Pollos.Save(pollos);
+            return Ok(pollos.Id);
         }
         [HttpPut]
         [Route("Editar")]
-        public IActionResult editar(int? id, GalponesRequestDto galponesRequest)
+        public IActionResult editar(int? id, PollosRequestDto pollosRequest)
         {
             if (!id.HasValue)
             { return BadRequest(); }
@@ -70,30 +70,31 @@ namespace CriaderosDePollos.WebApi.Controllers
             {
                 return BadRequest();
             }
-            Galpones galponEdi = _Galpones.GetById(id.Value);
-            if (galponEdi is null)
+            Pollos PollosEdi = _Pollos.GetById(id.Value);
+            if (PollosEdi is null)
             {
                 return NotFound();
             }
-            _mapper.Map(galponesRequest, galponEdi);
-            _Galpones.Save(galponEdi);
+            _mapper.Map(pollosRequest, PollosEdi);
+            _Pollos.Save(PollosEdi);
             return Ok();
         }
         [HttpDelete]
-        [Route("Eliminar")]
+        [Route("eliminar")]
         public IActionResult eliminar(int? id)
         {
             if (!id.HasValue)
             {
                 return BadRequest();
             }
-            Galpones galponEli = _Galpones.GetById(id.Value);
-            if (galponEli is null)
+            Pollos pollosEli = _Pollos.GetById(id.Value);
+            if (pollosEli is null)
             {
                 return NotFound();
             }
-            _Galpones.Delete(galponEli.Id);
+            _Pollos.Delete(pollosEli.Id);
             return Ok();
         }
     }
 }
+

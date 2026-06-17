@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DbDataAccess>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-        o => o.MigrationsAssembly("Granja.WebApi"));
+    o => o.MigrationsAssembly("CriaderosDePollos.WebApi"));
     options.UseLazyLoadingProxies();
 
 });
