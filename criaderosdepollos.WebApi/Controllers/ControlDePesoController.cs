@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CriaderosDePollos.WebApi.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class ControlDePesoController: ControllerBase
     {
         private readonly ILogger<ControlDePesoController> _logger;
