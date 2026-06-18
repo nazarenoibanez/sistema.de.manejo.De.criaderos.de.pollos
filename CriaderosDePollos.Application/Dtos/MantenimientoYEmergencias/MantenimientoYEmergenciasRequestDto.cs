@@ -12,8 +12,10 @@ namespace CriaderosDePollos.Application.Dtos.MantenimientoYEmergencias
         public string Descripcion { get; set; }
 
         public decimal Costo { get; set; }
+        [DataType(DataType.Date)]
 
         public DateTime fechaRepote { get; set; }
+        [DataType(DataType.Date)]
 
         public DateTime? fechaResolucion { get; set; }
         public string estado { get; set; }

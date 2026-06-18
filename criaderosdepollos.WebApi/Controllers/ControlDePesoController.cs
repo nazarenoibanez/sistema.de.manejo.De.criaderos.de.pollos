@@ -29,7 +29,7 @@ namespace CriaderosDePollos.WebApi.Controllers
         [Route("All")]
         public IActionResult All()
         {
-            return Ok(_mapper.Map<IList<ControlDePesoRequestDto>>(_controlPesoApp.GetAll()));
+            return Ok(_mapper.Map<IList<ControlDePesoResponseDto>>(_controlPesoApp.GetAll()));
 
         }
 

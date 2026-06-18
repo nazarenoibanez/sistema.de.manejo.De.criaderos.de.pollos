@@ -10,8 +10,9 @@ namespace CriaderosDePollos.Entities
     public class ControlDePeso : IEntidad
     {
         public int Id { get; set; }
-        [ForeignKey(nameof(controlID))]
-        public int controlID { get; set; }
+
+        public int ConteodepollosId { get; set; }
+        [ForeignKey(nameof(ConteodepollosId))]
 
         public virtual Conteodepollos Conteodepollos { get; set; }
         public DateTime FechaPasaje { get; set; }

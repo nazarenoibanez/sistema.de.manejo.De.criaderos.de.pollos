@@ -4,6 +4,7 @@ using CriaderosDePollos.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CriaderosDePollos.WebApi.Migrations
 {
     [DbContext(typeof(DbDataAccess))]
-    partial class DbDataAccessModelSnapshot : ModelSnapshot
+    [Migration("20260618195323_CriaderosDePollos")]
+    partial class CriaderosDePollos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,15 +176,15 @@ namespace CriaderosDePollos.WebApi.Migrations
                     b.Property<int>("CantidadRetirada")
                         .HasColumnType("int");
 
-                    b.Property<int>("ControlDePesoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Destino")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("PesoTotalKG")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("controlID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("fechaRetiro")
                         .HasColumnType("datetime2");
@@ -191,7 +194,7 @@ namespace CriaderosDePollos.WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ControlDePesoId");
+                    b.HasIndex("controlID");
 
                     b.ToTable("RetiroDePollos");
                 });
@@ -439,7 +442,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                 {
                     b.HasOne("CriaderosDePollos.Entities.ControlDePeso", "control")
                         .WithMany()
-                        .HasForeignKey("ControlDePesoId")
+                        .HasForeignKey("controlID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

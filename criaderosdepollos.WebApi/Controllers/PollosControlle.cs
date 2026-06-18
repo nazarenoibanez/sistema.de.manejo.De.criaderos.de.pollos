@@ -40,12 +40,12 @@ namespace CriaderosDePollos.WebApi.Controllers
             {
                 return BadRequest();
             }
-            Pollos galpon = _Pollos.GetById(id.Value);
-            if (galpon is null)
+            Pollos pollos = _Pollos.GetById(id.Value);
+            if (pollos is null)
             {
                 return NotFound();
             }
-            return Ok(_mapper.Map<PollosRequestDto>(galpon));
+            return Ok(_mapper.Map<PollosResponseDto>(pollos));
 
         }
         [HttpPost]

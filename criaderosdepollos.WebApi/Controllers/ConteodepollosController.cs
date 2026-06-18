@@ -31,7 +31,7 @@ namespace CriaderosDePollos.WebApi.Controllers
         [Route("All")]
         public IActionResult All()
         {
-            return Ok(_mapper.Map<IList<ConteodepollosRequestDto>>(_conteoDePollo.GetAll()));
+            return Ok(_mapper.Map<IList<ConteodepollosResponseDto>>(_conteoDePollo.GetAll()));
 
         }
 

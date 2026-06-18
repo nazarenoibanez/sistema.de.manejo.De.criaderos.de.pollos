@@ -7,12 +7,10 @@ namespace CriaderosDePollos.Application.Dtos.ControlDePeso
 {
     public class ControlDePesoRequestDto
     {
-        public int controlID { get; set; }
+        public int ConteodepollosId { get; set; }
         [DataType(DataType.Date)]
         public DateTime FechaPasaje { get; set; }
-
         public int EdadDias { get; set; }
-
         public decimal PesoPromedioGr { get; set; }
     }
 }
