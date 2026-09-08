@@ -30,7 +30,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                 column: "ControlDePesoId",
                 principalTable: "ControlDePeso",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
         }
 
         /// <inheritdoc />
@@ -56,7 +56,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                 column: "controlID",
                 principalTable: "ControlDePeso",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
         }
     }
 }
