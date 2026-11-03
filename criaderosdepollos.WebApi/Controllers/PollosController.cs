@@ -10,14 +10,14 @@ namespace CriaderosDePollos.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PollosControlle : ControllerBase
+    public class PollosController : ControllerBase
     {
-        private readonly ILogger<PollosControlle> _logger;
+        private readonly ILogger<PollosController> _logger;
         private readonly IStringService _service;
         private readonly IApplication<Pollos> _Pollos;
         private readonly IMapper _mapper;
 
-        public PollosControlle(ILogger<PollosControlle> logger, IStringService service,
+        public PollosController(ILogger<PollosController> logger, IStringService service,
             IApplication<Pollos> pollos, IMapper mapper)
         {
             _logger = logger;
