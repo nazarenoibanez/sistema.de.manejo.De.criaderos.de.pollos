@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CriaderosDePollos.WebApi.Migrations
 {
     /// <inheritdoc />
-    public partial class CriaderosDePollosWebApi : Migration
+    public partial class inicialclean : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +15,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -29,7 +29,10 @@ namespace CriaderosDePollos.WebApi.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nombres = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Apellidos = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -81,12 +84,31 @@ namespace CriaderosDePollos.WebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Trabajadors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rol = table.Column<int>(type: "int", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FechaDeNacimiento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaIngreso = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaSalida = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Trabajadors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -107,7 +129,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -129,7 +151,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -146,8 +168,8 @@ namespace CriaderosDePollos.WebApi.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -170,7 +192,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -243,7 +265,6 @@ namespace CriaderosDePollos.WebApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    controlID = table.Column<int>(type: "int", nullable: false),
                     ConteodepollosId = table.Column<int>(type: "int", nullable: false),
                     FechaPasaje = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EdadDias = table.Column<int>(type: "int", nullable: false),
@@ -266,7 +287,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    controlID = table.Column<int>(type: "int", nullable: false),
+                    ControlDePesoId = table.Column<int>(type: "int", nullable: false),
                     fechaRetiro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CantidadRetirada = table.Column<int>(type: "int", nullable: false),
                     PesoTotalKG = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -277,8 +298,8 @@ namespace CriaderosDePollos.WebApi.Migrations
                 {
                     table.PrimaryKey("PK_RetiroDePollos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RetiroDePollos_ControlDePeso_controlID",
-                        column: x => x.controlID,
+                        name: "FK_RetiroDePollos_ControlDePeso_ControlDePesoId",
+                        column: x => x.ControlDePesoId,
                         principalTable: "ControlDePeso",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -344,9 +365,9 @@ namespace CriaderosDePollos.WebApi.Migrations
                 column: "GalponesID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RetiroDePollos_controlID",
+                name: "IX_RetiroDePollos_ControlDePesoId",
                 table: "RetiroDePollos",
-                column: "controlID");
+                column: "ControlDePesoId");
         }
 
         /// <inheritdoc />
@@ -372,6 +393,9 @@ namespace CriaderosDePollos.WebApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "RetiroDePollos");
+
+            migrationBuilder.DropTable(
+                name: "Trabajadors");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

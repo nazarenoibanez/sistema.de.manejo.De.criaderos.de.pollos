@@ -1,5 +1,6 @@
 ﻿using CriaderoDePollos.Entities;
 using CriaderosDePollos.Entities;
+using CriaderosDePollos.Entities.MicrosoftIdentity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace CriaderosDePollos.DataAccess
 {
-    public class DbDataAccess : IdentityDbContext
+    public class DbDataAccess : IdentityDbContext<User, Role, Guid>
     {
         public virtual DbSet<Pollos> Pollos { get; set; }
         public virtual DbSet<Galpones> Galpones { get; set; }
@@ -16,6 +17,7 @@ namespace CriaderosDePollos.DataAccess
         public virtual DbSet<ControlDePeso> ControlDePeso { get; set; }
         public virtual DbSet<MantenimientoYEmergencias> MantenimientoYEmergencias { get; set; }
         public virtual DbSet<RetiroDePollos> RetiroDePollos { get; set; }
+        public virtual DbSet<trabajador> Trabajadors { get; set; }
         public DbDataAccess(DbContextOptions<DbDataAccess> options) : base(options)
         {
         }
