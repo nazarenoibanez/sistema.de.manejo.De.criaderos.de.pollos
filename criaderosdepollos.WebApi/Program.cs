@@ -35,7 +35,7 @@ builder.Services.AddCors(options =>
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => { 
-c.SwaggerDoc("v1", new OpenApiInfo { Title = "Libros.WebApi", Version = "v1" });
+c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sistema.De.pollos.WebApi", Version = "v1" });
 var jwtSecurityScheme = new OpenApiSecurityScheme
 {
     BearerFormat = "JWT",
