@@ -16,6 +16,6 @@ namespace CriaderosDePollos.Application.Dtos.Trabajador
         public string email { get; set; }
         public DateTime FechaDeNacimiento { get; set; }
         public DateTime FechaIngreso { get; set; }
-        public DateTime FechaSalida { get; set; }
+        public DateTime? FechaSalida { get; set; }
     }
 }
