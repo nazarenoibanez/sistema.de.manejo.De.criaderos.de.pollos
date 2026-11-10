@@ -54,12 +54,6 @@ c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
 c.AddSecurityRequirement(new OpenApiSecurityRequirement { { jwtSecurityScheme, Array.Empty<string>() } });
 });
 
-builder.Services.AddDbContext<DbDataAccess>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-            o => o.MigrationsAssembly("criaderos.WebApi"));
-    options.UseLazyLoadingProxies();
-});
 
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
 
