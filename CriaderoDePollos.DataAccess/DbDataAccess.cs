@@ -1,4 +1,5 @@
 ﻿using CriaderoDePollos.Entities;
+using CriaderosDePollos.Abstactions;
 using CriaderosDePollos.Entities;
 using CriaderosDePollos.Entities.MicrosoftIdentity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -24,6 +25,18 @@ namespace CriaderosDePollos.DataAccess
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.LogTo(Console.WriteLine).EnableDetailedErrors();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            foreach (var fk in modelBuilder.Model.GetEntityTypes()
+                         .Where(t => typeof(IEntidad).IsAssignableFrom(t.ClrType))
+                         .SelectMany(t => t.GetForeignKeys()))
+            {
+                fk.DeleteBehavior = DeleteBehavior.Restrict;
+            }
         }
     }
 }
