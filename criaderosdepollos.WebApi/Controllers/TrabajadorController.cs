@@ -4,10 +4,13 @@ using CriaderosDePollos.Application.Dtos.RetiroDePollos;
 using CriaderosDePollos.Application.Dtos.Trabajador;
 using CriaderosDePollos.Entities;
 using CriaderosDePollos.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CriaderosDePollos.WebApi.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class TrabajadorController : ControllerBase
