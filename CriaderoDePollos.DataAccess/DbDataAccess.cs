@@ -30,12 +30,10 @@ namespace CriaderosDePollos.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            foreach (var fk in modelBuilder.Model.GetEntityTypes()
-                         .Where(t => typeof(IEntidad).IsAssignableFrom(t.ClrType))
-                         .SelectMany(t => t.GetForeignKeys()))
+            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
-                fk.DeleteBehavior = DeleteBehavior.Restrict;
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
         }
     }
