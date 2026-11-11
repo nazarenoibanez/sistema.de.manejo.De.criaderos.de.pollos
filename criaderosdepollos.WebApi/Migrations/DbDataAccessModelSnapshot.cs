@@ -163,7 +163,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("Role", (string)null);
                 });
 
             modelBuilder.Entity("CriaderosDePollos.Entities.MicrosoftIdentity.User", b =>
@@ -242,7 +242,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("CriaderosDePollos.Entities.Pollos", b =>
@@ -362,6 +362,8 @@ namespace CriaderosDePollos.WebApi.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
+
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
@@ -386,6 +388,8 @@ namespace CriaderosDePollos.WebApi.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserClaims", (string)null);
+
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
@@ -407,6 +411,8 @@ namespace CriaderosDePollos.WebApi.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserLogins", (string)null);
+
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
@@ -441,6 +447,36 @@ namespace CriaderosDePollos.WebApi.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+
+                    b.UseTptMappingStrategy();
+                });
+
+            modelBuilder.Entity("CriaderosDePollos.Entities.MicrosoftIdentity.RoleClaim", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>");
+
+                    b.ToTable("RoleClaim", (string)null);
+                });
+
+            modelBuilder.Entity("CriaderosDePollos.Entities.MicrosoftIdentity.UserClaim", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>");
+
+                    b.ToTable("UserClaim", (string)null);
+                });
+
+            modelBuilder.Entity("CriaderosDePollos.Entities.MicrosoftIdentity.UserLogin", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>");
+
+                    b.ToTable("UserLogin", (string)null);
+                });
+
+            modelBuilder.Entity("CriaderosDePollos.Entities.MicrosoftIdentity.UserToken", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>");
+
+                    b.ToTable("UserToken", (string)null);
                 });
 
             modelBuilder.Entity("CriaderoDePollos.Entities.Conteodepollos", b =>
@@ -448,13 +484,13 @@ namespace CriaderosDePollos.WebApi.Migrations
                     b.HasOne("CriaderosDePollos.Entities.Galpones", "Galpones")
                         .WithMany()
                         .HasForeignKey("GalponesID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("CriaderosDePollos.Entities.Pollos", "Pollos")
                         .WithMany("Conteodepollos")
                         .HasForeignKey("PollosID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Galpones");
@@ -467,7 +503,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                     b.HasOne("CriaderoDePollos.Entities.Conteodepollos", "Conteodepollos")
                         .WithMany()
                         .HasForeignKey("ConteodepollosId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Conteodepollos");
@@ -478,7 +514,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                     b.HasOne("CriaderosDePollos.Entities.Galpones", "Galpones")
                         .WithMany()
                         .HasForeignKey("GalponesID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Galpones");
@@ -489,7 +525,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                     b.HasOne("CriaderosDePollos.Entities.ControlDePeso", "control")
                         .WithMany()
                         .HasForeignKey("ControlDePesoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("control");
@@ -500,7 +536,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                     b.HasOne("CriaderosDePollos.Entities.MicrosoftIdentity.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -509,7 +545,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                     b.HasOne("CriaderosDePollos.Entities.MicrosoftIdentity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -518,7 +554,7 @@ namespace CriaderosDePollos.WebApi.Migrations
                     b.HasOne("CriaderosDePollos.Entities.MicrosoftIdentity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -527,13 +563,13 @@ namespace CriaderosDePollos.WebApi.Migrations
                     b.HasOne("CriaderosDePollos.Entities.MicrosoftIdentity.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("CriaderosDePollos.Entities.MicrosoftIdentity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -542,6 +578,42 @@ namespace CriaderosDePollos.WebApi.Migrations
                     b.HasOne("CriaderosDePollos.Entities.MicrosoftIdentity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CriaderosDePollos.Entities.MicrosoftIdentity.RoleClaim", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", null)
+                        .WithOne()
+                        .HasForeignKey("CriaderosDePollos.Entities.MicrosoftIdentity.RoleClaim", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CriaderosDePollos.Entities.MicrosoftIdentity.UserClaim", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", null)
+                        .WithOne()
+                        .HasForeignKey("CriaderosDePollos.Entities.MicrosoftIdentity.UserClaim", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CriaderosDePollos.Entities.MicrosoftIdentity.UserLogin", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", null)
+                        .WithOne()
+                        .HasForeignKey("CriaderosDePollos.Entities.MicrosoftIdentity.UserLogin", "LoginProvider", "ProviderKey")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CriaderosDePollos.Entities.MicrosoftIdentity.UserToken", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", null)
+                        .WithOne()
+                        .HasForeignKey("CriaderosDePollos.Entities.MicrosoftIdentity.UserToken", "UserId", "LoginProvider", "Name")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
